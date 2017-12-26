@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Filmes Populares</string>
+    <string name="app_name">Filmes Famosos</string>
+    <string name="error_message"> An error has occurred. Please try again later.</string>
+    <string name="action_ordering">Ordering</string>
+    <string name="action_top">Best Score</string>
+    <string name="action_popular">Most Popular</string>
+    <string name="movie_title">Titulo do Filme</string>
+    <string name="plot_synopsis">Sinopse do Filme</string>
+    <string name="user_rating">Nota dos Usuários</string>
+    <string name="release_date">Data de Lançamento</string>
+
+
 </resources>

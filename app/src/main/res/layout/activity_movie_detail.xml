@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/tv_movie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/movie_title"/>
+
+
+        <ImageView
+            android:id="@+id/iv_poster_small_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@android:drawable/btn_star_big_on"
+            android:layout_below="@+id/tv_movie_title"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_movie_title"
+        android:layout_alignLeft="@+id/tv_movie_title"
+        android:layout_alignStart="@+id/tv_movie_title"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:id="@+id/tv_plot_synopsis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plot_synopsis"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+        <TextView
+            android:id="@+id/tv_user_raiting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_rating"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/tv_plot_synopsis"/>
+        <TextView
+            android:id="@+id/tv_release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/release_date"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp"
+            android:layout_below="@id/tv_user_raiting"/>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
