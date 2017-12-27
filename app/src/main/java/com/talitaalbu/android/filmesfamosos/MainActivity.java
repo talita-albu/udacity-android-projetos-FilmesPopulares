@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean isOnline() {
+    private boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                             .getResponseFromHttpUrl(requestUrl);
 
                     List<Movie> movies = MoviesParseJson
-                            .getMoviesFromJson(MainActivity.this, jsonResponse);
+                            .getMoviesFromJson(jsonResponse);
 
                     return movies;
                 }

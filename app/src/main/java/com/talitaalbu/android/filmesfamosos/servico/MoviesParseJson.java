@@ -17,10 +17,9 @@ import java.util.List;
 
 public final class MoviesParseJson {
 
-    public static List<Movie> getMoviesFromJson(Context context, String jsonStr)
+    public static List<Movie> getMoviesFromJson(String jsonStr)
             throws JSONException {
 
-        final String IDENTIFIER_ID = "id";
         final String IDENTIFIER_POSTER_PATH = "poster_path";
         final String IDENTIFIER_ORIGINAL_TITLE = "original_title";
         final String IDENTIFIER_OVERVIEW = "overview";
@@ -44,8 +43,11 @@ public final class MoviesParseJson {
             /* Get the JSON object representing the day */
             JSONObject movie = movieArray.getJSONObject(i);
             Movie m = new Movie();
-            m.setID(movie.getInt(IDENTIFIER_ID));
             m.setPosterPath(IDENTIFIER_IMAGE+ movie.getString(IDENTIFIER_POSTER_PATH));
+            m.setOriginalTitle(movie.getString(IDENTIFIER_ORIGINAL_TITLE));
+            m.setOverview(movie.getString(IDENTIFIER_OVERVIEW));
+            m.setVoteAverage(movie.getString(IDENTIFIER_VOTE_AVERAGE));
+            m.setReleaseDate(movie.getString(IDENTIFIER_RELEASE_DATE));
             movies.add(m);
 
         }

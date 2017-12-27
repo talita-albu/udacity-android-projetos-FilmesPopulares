@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Filmes Famosos</string>
+    <string name="app_name">Famous Movies</string>
     <string name="error_message"> An error has occurred. Please try again later.</string>
     <string name="action_ordering">Ordering</string>
     <string name="action_top">Best Score</string>
@@ -8,6 +8,11 @@
     <string name="plot_synopsis">Sinopse do Filme</string>
     <string name="user_rating">Nota dos Usuários</string>
     <string name="release_date">Data de Lançamento</string>
+    <string name="action_share">Compartilhar</string>
+    <string name="synopsis_str">"Synopsis: "</string>
+    <string name="release_date_str">"Release Date: "</string>
+    <string name="rating_str">"Rating: "</string>
+
 
 
 </resources>

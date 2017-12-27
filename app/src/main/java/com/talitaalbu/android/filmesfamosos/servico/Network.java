@@ -30,7 +30,7 @@ public final class Network {
     private static final String TOP_RATED_MOVIE_URL =
     "https://api.themoviedb.org/3/movie/top_rated?api_key=";
 
-    private static final String API_KEY = "284e06ab86d0a46fcb041e055248e86b";
+    private static final String API_KEY = "ADD YOU API KEY";
     private static final String TAG = "Network";
 
 
