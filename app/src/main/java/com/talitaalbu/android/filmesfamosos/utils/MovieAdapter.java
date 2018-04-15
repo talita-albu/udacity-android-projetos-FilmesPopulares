@@ -1,17 +1,25 @@
 package com.talitaalbu.android.filmesfamosos.utils;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.talitaalbu.android.filmesfamosos.R;
+import com.talitaalbu.android.filmesfamosos.databinding.MovieInfoListItemBinding;
 import com.talitaalbu.android.filmesfamosos.model.Movie;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by talita.a.de.araujo on 26/12/2017.
@@ -20,6 +28,7 @@ import java.util.List;
 public class MovieAdapter  extends RecyclerView.Adapter <MovieAdapter.MovieHolder> {
     private List<Movie> movieData;
     private final Context mContext;
+    protected boolean showLoadMore = false;
 
     private final MovieAdapterOnClickHandler mClickHandler;
 
@@ -50,6 +59,22 @@ public class MovieAdapter  extends RecyclerView.Adapter <MovieAdapter.MovieHolde
     public void onBindViewHolder(MovieHolder viewHolder, int position) {
         Movie movie = movieData.get(position);
         Picasso.with(mContext).load(movie.getPosterPath()).into(viewHolder.mImage);
+
+        viewHolder.mMovieTitle.setText(movie.getOriginalTitle());
+        String dataFormatada = "";
+        try {
+            String dataEmUmFormato = movie.getReleaseDate();
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            Date data = formato.parse(dataEmUmFormato);
+            formato.applyPattern("dd/MM/yyyy");
+            dataFormatada = formato.format(data);
+        }
+        catch (ParseException ex)
+        {
+            Log.e("Conversão", ex.getMessage() );
+        }
+
+        viewHolder.mTypeMovie.setText(dataFormatada);
     }
 
     @Override
@@ -63,12 +88,20 @@ public class MovieAdapter  extends RecyclerView.Adapter <MovieAdapter.MovieHolde
         notifyDataSetChanged();
     }
 
+    public boolean isLoadMore(int position) {
+        return showLoadMore && (position == (getItemCount() - 1));
+    }
+
     class MovieHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final ImageView mImage;
+        public final TextView mMovieTitle;
+        public final TextView mTypeMovie;
 
         public MovieHolder(View view) {
             super(view);
             mImage = (ImageView) view.findViewById(R.id.iv_poster_image);
+            mMovieTitle = (TextView) view.findViewById(R.id.movie_item_title);
+            mTypeMovie = (TextView) view.findViewById(R.id.movie_item_genres);
             view.setOnClickListener(this);
         }
 

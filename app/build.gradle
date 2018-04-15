@@ -21,8 +21,8 @@ android {
     repositories {
 
         mavenCentral()
-
     }
+    dataBinding.enabled = true;
 }
 
 dependencies {

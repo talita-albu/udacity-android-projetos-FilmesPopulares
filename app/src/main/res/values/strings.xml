@@ -12,7 +12,10 @@
     <string name="synopsis_str">"Synopsis: "</string>
     <string name="release_date_str">"Release Date: "</string>
     <string name="rating_str">"Rating: "</string>
-
+    <string name="btn_favorite_desc">Save to favorites</string>
+    <string name="nameMovie">NameMovie</string>
+    <string name="TypeMovie">Tipo do Filme</string>
+    <string name="timeFormat">DD/mm/YYYY</string>
 
 
 </resources>
