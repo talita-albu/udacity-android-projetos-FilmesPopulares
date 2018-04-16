@@ -74,7 +74,7 @@ public class MovieAdapter  extends RecyclerView.Adapter <MovieAdapter.MovieHolde
             Log.e("Conversão", ex.getMessage() );
         }
 
-        viewHolder.mTypeMovie.setText(dataFormatada);
+        viewHolder.mReleaseDate.setText(dataFormatada);
     }
 
     @Override
@@ -95,13 +95,13 @@ public class MovieAdapter  extends RecyclerView.Adapter <MovieAdapter.MovieHolde
     class MovieHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final ImageView mImage;
         public final TextView mMovieTitle;
-        public final TextView mTypeMovie;
+        public final TextView mReleaseDate;
 
         public MovieHolder(View view) {
             super(view);
             mImage = (ImageView) view.findViewById(R.id.iv_poster_image);
             mMovieTitle = (TextView) view.findViewById(R.id.movie_item_title);
-            mTypeMovie = (TextView) view.findViewById(R.id.movie_item_genres);
+            mReleaseDate = (TextView) view.findViewById(R.id.movie_item_released);
             view.setOnClickListener(this);
         }
 

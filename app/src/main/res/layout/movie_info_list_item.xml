@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools">
-<android.support.constraint.ConstraintLayout >
+<android.support.constraint.ConstraintLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
 
 <LinearLayout
     android:id="@+id/layout_image"
@@ -50,17 +50,30 @@
                 android:id="@+id/movie_item_title"
                 style="@style/MovieItemText"
                 android:lines="1"
-                android:text="@string/nameMovie"
+                tools:text="@string/nameMovie"
                 android:textColor="@color/primaryText"
                 android:textSize="@dimen/text_size_large"
                 android:textStyle="bold" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/movie_item_genres"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@android:drawable/ic_menu_agenda" />
+
+    <TextView
+                android:id="@+id/movie_item_released"
                 style="@style/MovieItemText"
-                android:text="@string/TypeMovie"
-                android:textColor="@color/text"
+        android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+                tools:text="@string/releaseDate"
+                android:textColor="@color/secondaryText"
                 android:textSize="@dimen/text_size_medium" />
+</LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
