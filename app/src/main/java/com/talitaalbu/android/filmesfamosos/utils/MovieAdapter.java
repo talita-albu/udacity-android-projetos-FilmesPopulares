@@ -1,7 +1,6 @@
 package com.talitaalbu.android.filmesfamosos.utils;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,14 +11,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.talitaalbu.android.filmesfamosos.R;
-import com.talitaalbu.android.filmesfamosos.databinding.MovieInfoListItemBinding;
 import com.talitaalbu.android.filmesfamosos.model.Movie;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by talita.a.de.araujo on 26/12/2017.

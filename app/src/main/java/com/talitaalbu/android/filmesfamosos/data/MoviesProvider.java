@@ -15,7 +15,7 @@ public class MoviesProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private MoviesDb mOpenHelper;
 
-    static final int MOVIE = 100;
+    private static final int MOVIE = 100;
     private static final String CONTENT_AUTHORITY = "com.filmespopulares";
 
     // Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact
@@ -26,14 +26,14 @@ public class MoviesProvider extends ContentProvider {
     public static final Uri CONTENT_URI =
             BASE_CONTENT_URI.buildUpon().appendPath(PATH_MOVIE).build();
 
-    public static final String CONTENT_ITEM_TYPE =
+    private static final String CONTENT_ITEM_TYPE =
             ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MOVIE;
 
-    public static Uri buildMovieUri(long id) {
+    private static Uri buildMovieUri(long id) {
         return ContentUris.withAppendedId(CONTENT_URI, id);
     }
 
-    static UriMatcher buildUriMatcher() {
+    private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = CONTENT_AUTHORITY;
 

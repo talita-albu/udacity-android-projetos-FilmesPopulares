@@ -1,15 +1,12 @@
 package com.talitaalbu.android.filmesfamosos.servico;
 
-import com.talitaalbu.android.filmesfamosos.model.Movie;
 import com.talitaalbu.android.filmesfamosos.model.Trailer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by talita.a.de.araujo on 26/12/2017.

@@ -79,7 +79,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/divison"
+        android:layout_height="@dimen/division"
         android:background="@color/divider"
         app:layout_constraintStart_toStartOf="@+id/header_detail"
         app:layout_constraintTop_toBottomOf="@id/constraintLayout" />
@@ -97,7 +97,7 @@
     <View
         android:id="@+id/view2"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/divison"
+        android:layout_height="@dimen/division"
         android:background="@color/divider"
         app:layout_constraintTop_toBottomOf="@+id/tvPlotSynopsis" />
 
@@ -124,7 +124,7 @@
     <View
         android:id="@+id/view3"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/divison"
+        android:layout_height="@dimen/division"
         android:background="@color/divider"
         app:layout_constraintTop_toBottomOf="@+id/recycler_view_trailers" />
 

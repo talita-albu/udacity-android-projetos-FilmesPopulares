@@ -16,14 +16,6 @@ public class Trailer implements Serializable {
 
     public Trailer(){}
 
-    public Trailer(String id, String key, String title, String site, String type) {
-        this.id = id;
-        this.key = key;
-        this.title = title;
-        this.site = site;
-        this.type = type;
-    }
-
     public String getId() {
         return id;
     }

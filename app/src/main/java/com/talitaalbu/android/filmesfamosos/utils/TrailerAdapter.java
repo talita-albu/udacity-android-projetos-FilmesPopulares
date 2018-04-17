@@ -2,22 +2,15 @@ package com.talitaalbu.android.filmesfamosos.utils;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.talitaalbu.android.filmesfamosos.R;
-import com.talitaalbu.android.filmesfamosos.model.Movie;
 import com.talitaalbu.android.filmesfamosos.model.Trailer;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,7 +49,6 @@ public class TrailerAdapter extends RecyclerView.Adapter <TrailerAdapter.Trailer
 
     @Override
     public void onBindViewHolder(TrailerHolder viewHolder, int position) {
-        Trailer t = trailerData.get(position);
         viewHolder.mTrailerCounting.setText(mContext.getString(R.string.trailer_info) + " " + (position+1));
     }
 
@@ -81,12 +73,10 @@ public class TrailerAdapter extends RecyclerView.Adapter <TrailerAdapter.Trailer
     }
 
     class TrailerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final ImageButton mImage;
         private final TextView mTrailerCounting;
 
         public TrailerHolder(View view) {
             super(view);
-            mImage = (ImageButton) view.findViewById(R.id.btn_play);
             mTrailerCounting = (TextView) view.findViewById(R.id.tv_trailer_info);
             view.setOnClickListener(this);
         }

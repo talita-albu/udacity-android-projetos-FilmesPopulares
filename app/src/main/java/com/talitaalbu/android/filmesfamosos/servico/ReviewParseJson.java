@@ -1,7 +1,6 @@
 package com.talitaalbu.android.filmesfamosos.servico;
 
 import com.talitaalbu.android.filmesfamosos.model.Review;
-import com.talitaalbu.android.filmesfamosos.model.Trailer;
 
 import org.json.JSONArray;
 import org.json.JSONException;

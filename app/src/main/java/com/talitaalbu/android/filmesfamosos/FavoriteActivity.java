@@ -92,13 +92,6 @@ public class FavoriteActivity extends AppCompatActivity implements MovieAdapter.
         mNoFavorite.setVisibility(View.VISIBLE);
     }
 
-    private boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
-    }
-
     class FavoriteTask extends AsyncTask<Void, Void, ArrayList<Movie>> {
 
         private final String[] FILME_COLUMNS = {
@@ -112,7 +105,6 @@ public class FavoriteActivity extends AppCompatActivity implements MovieAdapter.
                 MoviesDb.COLUMN_LANCAMENTO
         };
 
-        public static final int COL_ID = 0;
         static final int COL_FILME_ID = 1;
         static final int COL_TITULO = 2;
         static final int COL_IMAGEM_PATH = 3;
