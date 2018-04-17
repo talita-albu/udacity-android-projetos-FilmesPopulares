@@ -77,10 +77,6 @@ public class Movie implements Serializable {
         this.backdropPath = backdropPath;
     }
 
-    public boolean isFavored() {
-        return favored;
-    }
-
     public void setFavored(boolean favored) {
         this.favored = favored;
     }

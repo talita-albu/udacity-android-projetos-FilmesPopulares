@@ -1,7 +1,5 @@
 package com.talitaalbu.android.filmesfamosos.servico;
 
-import android.content.Context;
-
 import com.talitaalbu.android.filmesfamosos.model.Movie;
 
 import org.json.JSONArray;

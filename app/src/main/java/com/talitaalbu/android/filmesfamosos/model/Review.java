@@ -15,13 +15,6 @@ public class Review implements Serializable {
 
     public Review(){}
 
-    public Review(String id, String author, String review, String url) {
-        this.id = id;
-        this.author = author;
-        this.review = review;
-        this.url = url;
-    }
-
     public String getId() {
         return id;
     }

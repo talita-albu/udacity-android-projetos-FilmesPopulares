@@ -13,11 +13,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,25 +29,14 @@ import com.talitaalbu.android.filmesfamosos.databinding.ActivityMovieDetailBindi
 import com.talitaalbu.android.filmesfamosos.model.Movie;
 import com.talitaalbu.android.filmesfamosos.model.Review;
 import com.talitaalbu.android.filmesfamosos.model.Trailer;
-import com.talitaalbu.android.filmesfamosos.servico.MoviesParseJson;
 import com.talitaalbu.android.filmesfamosos.servico.Network;
 import com.talitaalbu.android.filmesfamosos.servico.ReviewParseJson;
 import com.talitaalbu.android.filmesfamosos.servico.TrailerParseJson;
-import com.talitaalbu.android.filmesfamosos.utils.MovieAdapter;
 import com.talitaalbu.android.filmesfamosos.utils.ReviewAdapter;
 import com.talitaalbu.android.filmesfamosos.utils.TrailerAdapter;
 
-import org.json.JSONException;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by talita.a.de.araujo on 26/12/2017.
@@ -100,7 +87,7 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
         mRecyclerTrailers.setAdapter(tAdapter);
         loadTrailers();
 
-        rAdapter = new ReviewAdapter(this);
+        rAdapter = new ReviewAdapter();
         layoutManagerR
                 = new GridLayoutManager(this, 1);
         mRecyclerReviews = (RecyclerView) findViewById(R.id.recycler_view_reviews);
@@ -157,7 +144,6 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
         }
     }
 
-    MenuItem filterMenuItem;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -179,13 +165,13 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
         return super.onOptionsItemSelected(item);
     }
 
-    public void shareTrailer(int messageTemplateResId, Trailer trailer) {
+    private void shareTrailer(int messageTemplateResId, Trailer trailer) {
         startActivity(Intent.createChooser(
                 createShareIntent(messageTemplateResId, trailer.getTitle(), trailer.getKey()),
                 getString(R.string.title_share_trailer)));
     }
 
-    public Intent createShareIntent(int messageTemplateResId, String title, String key) {
+    private Intent createShareIntent(int messageTemplateResId, String title, String key) {
         ShareCompat.IntentBuilder builder = ShareCompat.IntentBuilder.from(this)
                 .setType("text/plain")
                 .setText(getString(messageTemplateResId, title, " http://www.youtube.com/watch?v=" + key));
@@ -279,11 +265,9 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
 
     class TrailersTask extends AsyncTask<String, Void, ArrayList<Trailer>> {
         Context context;
-        ProgressDialog pDialog;
 
         public TrailersTask(Context ctx) {
             this.context = ctx;
-            pDialog = new ProgressDialog(context);
         }
 
         @Override
@@ -332,11 +316,9 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
 
     class ReviewsTask extends AsyncTask<String, Void, ArrayList<Review>> {
         Context context;
-        ProgressDialog pDialog;
 
         public ReviewsTask(Context ctx) {
             this.context = ctx;
-            pDialog = new ProgressDialog(context);
         }
 
         @Override

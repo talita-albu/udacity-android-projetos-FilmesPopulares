@@ -5,12 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.talitaalbu.android.filmesfamosos.R;
 import com.talitaalbu.android.filmesfamosos.model.Review;
-import com.talitaalbu.android.filmesfamosos.model.Trailer;
 
 import java.util.List;
 
@@ -20,11 +18,10 @@ import java.util.List;
 
 public class ReviewAdapter extends RecyclerView.Adapter <ReviewAdapter.ReviewHolder> {
     private List<Review> reviewData;
-    private final Context mContext;
     private boolean showLoadMore = false;
 
-    public ReviewAdapter(Context context) {
-        mContext = context;
+    public ReviewAdapter() {
+
     }
 
 
@@ -54,11 +51,6 @@ public class ReviewAdapter extends RecyclerView.Adapter <ReviewAdapter.ReviewHol
     public void setData(List<Review> mReviewData) {
         reviewData = mReviewData;
         notifyDataSetChanged();
-    }
-
-    public Review getItem(int position)
-    {
-        return reviewData.get(position);
     }
 
     public boolean isLoadMore(int position) {

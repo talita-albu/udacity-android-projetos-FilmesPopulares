@@ -33,7 +33,7 @@
     <dimen name="detail_image_size">150dp</dimen>
     <dimen name="person_image_size_width">20dp</dimen>
     <dimen name="person_image_size">30dp</dimen>
-    <dimen name="divison">1dp</dimen>
+    <dimen name="division">1dp</dimen>
     <dimen name="favorite_size">30dp</dimen>
 
 
