@@ -16,12 +16,12 @@ public class MoviesProvider extends ContentProvider {
     private MoviesDb mOpenHelper;
 
     static final int MOVIE = 100;
-    public static final String CONTENT_AUTHORITY = "com.filmespopulares";
+    private static final String CONTENT_AUTHORITY = "com.filmespopulares";
 
     // Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact
     // the content provider.
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
-    public static final String PATH_MOVIE = "movie";
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    private static final String PATH_MOVIE = "movie";
 
     public static final Uri CONTENT_URI =
             BASE_CONTENT_URI.buildUpon().appendPath(PATH_MOVIE).build();
@@ -29,7 +29,7 @@ public class MoviesProvider extends ContentProvider {
     public static final String CONTENT_ITEM_TYPE =
             ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MOVIE;
 
-    public static Uri buildFilmeUri(long id) {
+    public static Uri buildMovieUri(long id) {
         return ContentUris.withAppendedId(CONTENT_URI, id);
     }
 
@@ -90,7 +90,7 @@ public class MoviesProvider extends ContentProvider {
             case MOVIE: {
                 long _id = db.insert(MoviesDb.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = buildFilmeUri(_id);
+                    returnUri = buildMovieUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;

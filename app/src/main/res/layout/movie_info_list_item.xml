@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryLight"
         android:gravity="center"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/iv_poster_image"
         app:layout_constraintTop_toBottomOf="@+id/iv_poster_image">
@@ -61,7 +62,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         app:srcCompat="@android:drawable/ic_menu_agenda" />

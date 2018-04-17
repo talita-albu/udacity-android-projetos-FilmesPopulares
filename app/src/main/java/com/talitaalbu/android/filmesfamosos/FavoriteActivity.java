@@ -1,6 +1,5 @@
 package com.talitaalbu.android.filmesfamosos;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,13 +7,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,15 +17,10 @@ import android.widget.TextView;
 import com.talitaalbu.android.filmesfamosos.data.MoviesDb;
 import com.talitaalbu.android.filmesfamosos.data.MoviesProvider;
 import com.talitaalbu.android.filmesfamosos.model.Movie;
-import com.talitaalbu.android.filmesfamosos.servico.MoviesParseJson;
-import com.talitaalbu.android.filmesfamosos.servico.MoviesTaskCompleteListener;
-import com.talitaalbu.android.filmesfamosos.servico.Network;
 import com.talitaalbu.android.filmesfamosos.utils.MovieAdapter;
 
 import java.io.Serializable;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FavoriteActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler {
 
@@ -47,7 +37,7 @@ public class FavoriteActivity extends AppCompatActivity implements MovieAdapter.
         setContentView(R.layout.activity_favorite);
 
         mErrorMessage = (TextView) findViewById(R.id.tv_error_message);
-        mNoFavorite = (TextView) findViewById(R.id.tv_nomovie_message);
+        mNoFavorite = (TextView) findViewById(R.id.tv_no_movies_message);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading);
         mRecyclerMovies = (RecyclerView) findViewById(R.id.recycler_view_movies);
         layoutManager
@@ -156,7 +146,7 @@ public class FavoriteActivity extends AppCompatActivity implements MovieAdapter.
 
         @Override
         protected ArrayList<Movie> doInBackground(Void... args) {
-            if(isOnline()) {
+            //if(isOnline()) {
                 Cursor cursor = getContentResolver().query(
                         MoviesProvider.CONTENT_URI,
                         FILME_COLUMNS,
@@ -188,8 +178,8 @@ public class FavoriteActivity extends AppCompatActivity implements MovieAdapter.
                     ArrayList<Movie> movies = new ArrayList<>();
                     return movies;
                 }
-            }
-            return null;
+            //}
+            //return null;
         }
     }
 

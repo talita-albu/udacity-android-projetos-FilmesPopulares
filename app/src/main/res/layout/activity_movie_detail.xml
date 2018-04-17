@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent">
 <android.support.constraint.ConstraintLayout
     android:id="@+id/mainConstraint"
     android:layout_width="match_parent"
@@ -60,9 +61,9 @@
             android:id="@+id/movie_favorite_button"
             android:layout_width="@dimen/favorite_size"
             android:layout_height="@dimen/favorite_size"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="@dimen/keyline_1_minus_8dp"
+            android:layout_marginStart="@dimen/keyline_1_minus_8dp"
+            android:layout_marginTop="@dimen/keyline_1_minus_8dp"
             android:background="@null"
             android:contentDescription="@string/movie_item_btn_favorite_desc"
             android:onClick="onClickFavorite"
@@ -100,5 +101,53 @@
         android:background="@color/divider"
         app:layout_constraintTop_toBottomOf="@+id/tvPlotSynopsis" />
 
+    <TextView
+        android:id="@+id/tv_trailers_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/keyline_1"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        android:text="@string/trailer_title"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+        android:id="@+id/recycler_view_trailers"
+        android:layout_marginLeft="@dimen/keyline_1_minus_8dp"
+        android:layout_marginBottom="@dimen/keyline_1_minus_8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_trailers_title"
+        />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divison"
+        android:background="@color/divider"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view_trailers" />
+
+    <TextView
+        android:id="@+id/tv_review_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/keyline_1"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintTop_toBottomOf="@+id/view3"
+        android:text="@string/review_title"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+        android:id="@+id/recycler_view_reviews"
+        android:layout_marginLeft="@dimen/keyline_1_minus_8dp"
+        android:layout_marginBottom="@dimen/keyline_1_minus_8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_review_title"
+        />
+
 </android.support.constraint.ConstraintLayout>
+</ScrollView>
 </layout>
