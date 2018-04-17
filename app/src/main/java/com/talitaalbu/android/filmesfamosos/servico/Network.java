@@ -24,15 +24,18 @@ public final class Network {
         TOP_RATED_MOVIE
     }
 
-    private static final String INITIAL_URL = "https://api.themoviedb.org/3";
+    private static final String INITIAL_URL = "https://api.themoviedb.org/3/movie";
 
     private static final String POPULAR_MOVIE_URL =
-            INITIAL_URL+ "/movie/popular?api_key=";
+            INITIAL_URL+ "/popular?api_key=";
 
     private static final String TOP_RATED_MOVIE_URL =
-            INITIAL_URL+ "/movie/top_rated?api_key=";
+            INITIAL_URL+ "/top_rated?api_key=";
 
-    private static final String API_KEY = "284e06ab86d0a46fcb041e055248e86b";
+    public final static String TRAILERS = "videos";
+    public final static String REVIEWS = "reviews";
+
+    private static final String API_KEY = "ADD YOU API KEY";
     private static final String TAG = "Network";
 
 
@@ -46,12 +49,49 @@ public final class Network {
         {
             URLvalue = TOP_RATED_MOVIE_URL;
         }
+
         Uri builtUri = Uri.parse(URLvalue+ API_KEY).buildUpon()
                 .build();
 
         URL url = null;
         try {
             url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Built URI " + url);
+
+        return url;
+    }
+
+    public static URL buildTrailerUrl(String movieId) {
+        String URLvalue;
+
+        Uri.Builder b = Uri.parse(INITIAL_URL).buildUpon().appendPath(movieId).appendPath(TRAILERS)
+                .appendQueryParameter("api_key", API_KEY);
+
+        URL url = null;
+        try {
+            url = new URL(b.build().toString());;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Built URI " + url);
+
+        return url;
+    }
+
+    public static URL buildReviewUrl(String movieId) {
+        String URLvalue;
+
+        Uri.Builder b = Uri.parse(INITIAL_URL).buildUpon().appendPath(movieId).appendPath(REVIEWS)
+                .appendQueryParameter("api_key", API_KEY);
+
+        URL url = null;
+        try {
+            url = new URL(b.build().toString());;
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
