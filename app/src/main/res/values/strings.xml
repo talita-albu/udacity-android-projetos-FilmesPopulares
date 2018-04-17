@@ -1,7 +1,8 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+>
     <string name="app_name">Famous Movies</string>
     <string name="error_message"> An error has occurred. Please try again later.</string>
-    <string name="nomovies_message">There are no favorite Movies.</string>
+    <string name="no_movies_message">There are no favorite Movies.</string>
     <string name="action_ordering">Ordering</string>
     <string name="action_top">Best Score</string>
     <string name="action_popular">Most Popular</string>
@@ -20,6 +21,15 @@
     <string name="movie_item_btn_favorite_desc">Botao Favoritar</string>
     <string name="message_movie_favored">Filme Favoritado</string>
     <string name="loading">Loading</string>
+    <string name="no_trailers">Trailers were not found</string>
+    <string name="no_reviews">Reviews were not found</string>
+    <string name="trailer_info">Trailer</string>
+    <string name="trailer_title">Trailers:</string>
+    <string name="title_share_trailer">Share trailer</string>
+    <string name="share_template">Check out \'<xliff:g id="title">%1$s</xliff:g>\' at <xliff:g id="url">%2$s</xliff:g></string>
+    <string name="user_name_review">Nome Usuario</string>
+    <string name="user_description">Descricao Usuario</string>
+    <string name="review_title">Reviews:</string>
 
 
 </resources>

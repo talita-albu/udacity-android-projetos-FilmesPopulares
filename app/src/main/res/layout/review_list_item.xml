@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<android.support.constraint.ConstraintLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+
+    <ImageButton
+        android:id="@+id/btn_play"
+        android:layout_width="@dimen/person_image_size_width"
+        android:layout_height="@dimen/person_image_size"
+        android:layout_marginLeft="@dimen/keyline_1_minus_8dp"
+        android:layout_marginStart="@dimen/keyline_1_minus_8dp"
+        android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+        android:tint="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_person_info"
+        android:background="@null"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/tv_name_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/keyline_1_minus_8dp"
+        android:layout_marginBottom="@dimen/keyline_1_minus_8dp"
+        android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+        app:layout_constraintStart_toEndOf="@+id/btn_play"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/user_name_review"
+        android:textSize="@dimen/text_size_large"/>
+
+    <TextView
+        android:id="@+id/tv_user_review"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/keyline_1_minus_8dp"
+        android:layout_marginLeft="@dimen/keyline_1_minus_8dp"
+        android:layout_marginRight="@dimen/keyline_1_minus_8dp"
+        android:layout_marginStart="@dimen/keyline_1_minus_8dp"
+        android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_play"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_user"
+        tools:text="@string/user_description" />
+
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divison"
+        android:background="@color/divider"
+        android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_review" />
+
+</android.support.constraint.ConstraintLayout>
+</layout>
