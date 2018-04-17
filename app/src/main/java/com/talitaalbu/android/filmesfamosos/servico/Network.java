@@ -24,13 +24,15 @@ public final class Network {
         TOP_RATED_MOVIE
     }
 
+    private static final String INITIAL_URL = "https://api.themoviedb.org/3";
+
     private static final String POPULAR_MOVIE_URL =
-            "https://api.themoviedb.org/3/movie/popular?api_key=";
+            INITIAL_URL+ "/movie/popular?api_key=";
 
     private static final String TOP_RATED_MOVIE_URL =
-    "https://api.themoviedb.org/3/movie/top_rated?api_key=";
+            INITIAL_URL+ "/movie/top_rated?api_key=";
 
-    private static final String API_KEY = "ADD YOU API KEY";
+    private static final String API_KEY = "284e06ab86d0a46fcb041e055248e86b";
     private static final String TAG = "Network";
 
 

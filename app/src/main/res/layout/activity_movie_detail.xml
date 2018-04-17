@@ -1,67 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/mainConstraint"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="8dp">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_movie_title"
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/header_detail"
+        layout="@layout/detail_header"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/movie_title"/>
+        android:layout_width="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/tv_movie_title">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/header_detail"
+        app:layout_constraintStart_toStartOf="@+id/header_detail"
+        app:layout_constraintTop_toBottomOf="@+id/header_detail">
+
         <ImageView
             android:id="@+id/iv_poster_small_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:srcCompat="@android:drawable/btn_star_big_on"
-            android:layout_marginTop="10dp"/>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iv_poster_small_image"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:id="@+id/tv_plot_synopsis"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/detail_image_size"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
-            android:text="@string/plot_synopsis" />
+            android:layout_marginLeft="@dimen/keyline_1_minus_8dp"
+            android:layout_marginStart="@dimen/keyline_1_minus_8dp"
+            android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/btn_star_big_on" />
+
 
         <TextView
             android:id="@+id/tv_user_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_plot_synopsis"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
-            android:text="@string/user_rating" />
+            android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+            android:text="@string/user_rating"
+            app:layout_constraintStart_toStartOf="@+id/tv_release_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_release_date" />
 
         <TextView
             android:id="@+id/tv_release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_user_rating"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
-            android:text="@string/release_date" />
-    </RelativeLayout>
+            android:layout_marginTop="@dimen/top_detail"
+            android:text="@string/release_date"
+            app:layout_constraintStart_toEndOf="@+id/iv_poster_small_image"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+            android:layout_marginLeft="@dimen/left_detail"/>
 
-</RelativeLayout>
+        <ImageButton
+            android:id="@+id/movie_favorite_button"
+            android:layout_width="@dimen/favorite_size"
+            android:layout_height="@dimen/favorite_size"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:contentDescription="@string/movie_item_btn_favorite_desc"
+            android:onClick="onClickFavorite"
+            android:scaleType="fitXY"
+            android:src="@drawable/selector_favorite_button"
+            android:tint="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_release_date"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divison"
+        android:background="@color/divider"
+        app:layout_constraintStart_toStartOf="@+id/header_detail"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout" />
+
+    <TextView
+        android:id="@+id/tvPlotSynopsis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/keyline_1"
+        android:textSize="@dimen/text_size_medium"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        tools:text="@string/synopsis_str"
+        />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divison"
+        android:background="@color/divider"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlotSynopsis" />
+
+</android.support.constraint.ConstraintLayout>
+</layout>

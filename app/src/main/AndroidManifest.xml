@@ -18,7 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailMovieActivity"/>
+        <activity android:name=".DetailMovieActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".FavoriteActivity"/>
+
+        <provider
+            android:name=".data.MoviesProvider"
+            android:authorities="com.filmespopulares"
+            android:exported="false" />
     </application>
+
+
 
 </manifest>

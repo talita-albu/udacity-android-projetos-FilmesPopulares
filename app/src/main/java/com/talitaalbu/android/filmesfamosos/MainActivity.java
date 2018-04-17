@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private MovieAdapter mAdapter;
     private ProgressBar mLoadingIndicator;
     private TextView mErrorMessage;
+    private GridLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +42,20 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mErrorMessage = (TextView) findViewById(R.id.tv_error_message);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading);
         mRecyclerMovies = (RecyclerView) findViewById(R.id.recycler_view_movies);
-        GridLayoutManager layoutManager
+        layoutManager
                 = new GridLayoutManager(this, 2);
 
-        mRecyclerMovies.setLayoutManager(layoutManager);
-        mRecyclerMovies.setHasFixedSize(true);
         mAdapter = new MovieAdapter(this, this);
+
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override public int getSpanSize(int position) {
+                int spanCount = layoutManager.getSpanCount();
+                return (mAdapter.isLoadMore(position) /* && (position % spanCount == 0) */) ? spanCount : 1;
+            }
+        });
+
+        mRecyclerMovies.setLayoutManager(layoutManager);
+        mRecyclerMovies.setHasFixedSize(false);
         mRecyclerMovies.setAdapter(mAdapter);
 
         loadMovies(Network.SearchType.POPULAR_MOVIE);
@@ -152,5 +162,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 showErrorMessage();
             }
         }
+    }
+
+    public void onClickFavorite(View view) {
+        Intent intentToStartActivity = new Intent(this, FavoriteActivity.class);
+        startActivity(intentToStartActivity);
     }
 }

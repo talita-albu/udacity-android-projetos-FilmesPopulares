@@ -20,12 +20,14 @@ public final class MoviesParseJson {
     public static List<Movie> getMoviesFromJson(String jsonStr)
             throws JSONException {
 
+        final String IDENTIFIER_ID = "id";
         final String IDENTIFIER_POSTER_PATH = "poster_path";
         final String IDENTIFIER_ORIGINAL_TITLE = "original_title";
         final String IDENTIFIER_OVERVIEW = "overview";
         final String IDENTIFIER_VOTE_AVERAGE = "vote_average";
         final String IDENTIFIER_RELEASE_DATE = "release_date";
         final String IDENTIFIER_IMAGE = "http://image.tmdb.org/t/p/w500";
+        final String IDENTIFIER_BACKDROP_PATH = "backdrop_path";
 
         List<Movie> movies;
 
@@ -48,6 +50,8 @@ public final class MoviesParseJson {
             m.setOverview(movie.getString(IDENTIFIER_OVERVIEW));
             m.setVoteAverage(movie.getString(IDENTIFIER_VOTE_AVERAGE));
             m.setReleaseDate(movie.getString(IDENTIFIER_RELEASE_DATE));
+            m.setBackdropPath(IDENTIFIER_IMAGE+ movie.getString(IDENTIFIER_BACKDROP_PATH));
+            m.setId(movie.getString(IDENTIFIER_ID));
             movies.add(m);
 
         }
