@@ -34,8 +34,8 @@ public class DetailMovieActivity extends AppCompatActivity {
 //    private TextView mReleaseDate;
 //    private ImageView mPostSmallImage;
 
-    ActivityMovieDetailBinding mBinding;
-    Movie movie;
+    private ActivityMovieDetailBinding mBinding;
+    private Movie movie;
 
 
     @Override
@@ -173,7 +173,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         if (!button.isSelected()) Toast.makeText(this, R.string.message_movie_favored, Toast.LENGTH_SHORT);
     }
 
-    public static boolean checkIfItWasFavorited(Context context, String id) {
+    private static boolean checkIfItWasFavorited(Context context, String id) {
         Cursor cursor = context.getContentResolver().query(
                 MoviesProvider.CONTENT_URI,
                 null, MoviesDb.COLUMN_FILME_ID + " = ?",

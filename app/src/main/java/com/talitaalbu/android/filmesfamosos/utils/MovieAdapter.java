@@ -28,7 +28,7 @@ import java.util.Locale;
 public class MovieAdapter  extends RecyclerView.Adapter <MovieAdapter.MovieHolder> {
     private List<Movie> movieData;
     private final Context mContext;
-    protected boolean showLoadMore = false;
+    private boolean showLoadMore = false;
 
     private final MovieAdapterOnClickHandler mClickHandler;
 
@@ -93,9 +93,9 @@ public class MovieAdapter  extends RecyclerView.Adapter <MovieAdapter.MovieHolde
     }
 
     class MovieHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public final ImageView mImage;
-        public final TextView mMovieTitle;
-        public final TextView mReleaseDate;
+        private final ImageView mImage;
+        private final TextView mMovieTitle;
+        private final TextView mReleaseDate;
 
         public MovieHolder(View view) {
             super(view);

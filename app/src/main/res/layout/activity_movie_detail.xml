@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/header_detail"
-        layout="@layout/detalhe_header"
+        layout="@layout/detail_header"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
