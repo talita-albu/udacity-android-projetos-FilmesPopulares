@@ -1,12 +1,15 @@
 package com.talitaalbu.android.filmesfamosos.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**
  * Created by talita.a.de.araujo on 26/12/2017.
  */
 
-public class Movie implements Serializable {
+public class Movie implements Parcelable {
 
     private String posterPath;
     private String backdropPath;
@@ -28,6 +31,29 @@ public class Movie implements Serializable {
         this.releaseDate = releaseDate;
         this.posterPath = posterPath;
     }
+
+    protected Movie(Parcel in) {
+        posterPath = in.readString();
+        backdropPath = in.readString();
+        originalTitle = in.readString();
+        overview = in.readString();
+        voteAverage = in.readString();
+        releaseDate = in.readString();
+        favored = in.readByte() != 0;
+        id = in.readString();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 
     public String getPosterPath() {
         return posterPath;
@@ -88,4 +114,23 @@ public class Movie implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(posterPath);
+        parcel.writeString(backdropPath);
+        parcel.writeString(originalTitle );
+        parcel.writeString( overview );
+        parcel.writeString(voteAverage );
+        parcel.writeString(releaseDate);
+        parcel.writeByte((byte) (favored ? 1 : 0));
+        parcel.writeString(id );
+    }
+
+
 }
