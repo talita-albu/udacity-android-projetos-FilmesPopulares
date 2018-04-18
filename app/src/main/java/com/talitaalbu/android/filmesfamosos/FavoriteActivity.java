@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -81,7 +82,7 @@ public class FavoriteActivity extends AppCompatActivity implements MovieAdapter.
     public void onClick(Movie selectedMovie) {
 
         Intent intentToStartDetailActivity = new Intent(this, DetailMovieActivity.class);
-        intentToStartDetailActivity.putExtra(Intent.EXTRA_RETURN_RESULT, (Serializable) selectedMovie);
+        intentToStartDetailActivity.putExtra(Intent.EXTRA_RETURN_RESULT, (Parcelable) selectedMovie);
         startActivity(intentToStartDetailActivity);
     }
 

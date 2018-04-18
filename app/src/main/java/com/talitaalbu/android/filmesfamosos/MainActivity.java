@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private MovieAdapter mAdapter;
     private ProgressBar mLoadingIndicator;
     private TextView mErrorMessage;
+    private LinearLayout mNoInternetLayout;
     private GridLayoutManager layoutManager;
     private ArrayList<Movie> mMovies;
 
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         setContentView(R.layout.activity_main);
 
         mErrorMessage = (TextView) findViewById(R.id.tv_error_message);
+        mNoInternetLayout = (LinearLayout) findViewById(R.id.layout_no_internet);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading);
         mRecyclerMovies = (RecyclerView) findViewById(R.id.recycler_view_movies);
         layoutManager
@@ -81,13 +84,21 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
     private void showMovies() {
-        mErrorMessage.setVisibility(View.INVISIBLE);
         mRecyclerMovies.setVisibility(View.VISIBLE);
+        mNoInternetLayout.setVisibility(View.INVISIBLE);
+        mErrorMessage.setVisibility(View.INVISIBLE);
     }
 
     private void showErrorMessage() {
         mRecyclerMovies.setVisibility(View.INVISIBLE);
+        mNoInternetLayout.setVisibility(View.INVISIBLE);
         mErrorMessage.setVisibility(View.VISIBLE);
+    }
+
+    private void showNoInternetMessage() {
+        mRecyclerMovies.setVisibility(View.INVISIBLE);
+        mNoInternetLayout.setVisibility(View.VISIBLE);
+        mErrorMessage.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -160,20 +171,27 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             } catch (Exception e) {
                 e.printStackTrace();
-                return null;
+                ArrayList<Movie> movies = new ArrayList<>();
+                return movies;
             }
         }
 
         @Override
         protected void onPostExecute(ArrayList<Movie> movies) {
             mLoadingIndicator.setVisibility(View.INVISIBLE);
-            if (movies != null) {
+            if (movies != null && movies.size()>0) {
 
                 showMovies();
                 mMovies = movies;
                 mAdapter.setData(movies);
-            } else {
+            }
+            else if(movies != null && movies.size()==0)
+            {
                 showErrorMessage();
+            }
+            else
+            {
+                showNoInternetMessage();
             }
         }
     }
