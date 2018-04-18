@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.talitaalbu.android.filmesfamosos.data.MoviesDb;
 import com.talitaalbu.android.filmesfamosos.data.MoviesProvider;
 import com.talitaalbu.android.filmesfamosos.model.Movie;
+import com.talitaalbu.android.filmesfamosos.servico.Network;
 import com.talitaalbu.android.filmesfamosos.utils.MovieAdapter;
 
 import java.io.Serializable;
@@ -30,6 +31,8 @@ public class FavoriteActivity extends AppCompatActivity implements MovieAdapter.
     private TextView mErrorMessage;
     private TextView mNoFavorite;
     private GridLayoutManager layoutManager;
+    private static final String SAVED_LAYOUT_MANAGER = "SavedLayout" ;
+    private ArrayList<Movie> mMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,12 @@ public class FavoriteActivity extends AppCompatActivity implements MovieAdapter.
         mRecyclerMovies.setHasFixedSize(false);
         mRecyclerMovies.setAdapter(mAdapter);
 
-        loadMovies();
+        if (savedInstanceState == null || !savedInstanceState.containsKey(SAVED_LAYOUT_MANAGER)) {
+            loadMovies();
+        } else {
+            mMovies = savedInstanceState.getParcelableArrayList(SAVED_LAYOUT_MANAGER);
+            mAdapter.setData(mMovies);
+        }
     }
 
     @Override
@@ -165,6 +173,7 @@ public class FavoriteActivity extends AppCompatActivity implements MovieAdapter.
                     }
 
                     cursor.close();
+                    mMovies = resultFilmes;
                     return resultFilmes;
                 } else {
                     ArrayList<Movie> movies = new ArrayList<>();

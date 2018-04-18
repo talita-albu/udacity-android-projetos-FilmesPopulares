@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -21,17 +22,18 @@ import com.talitaalbu.android.filmesfamosos.servico.MoviesParseJson;
 import com.talitaalbu.android.filmesfamosos.servico.Network;
 import com.talitaalbu.android.filmesfamosos.utils.MovieAdapter;
 
-import java.io.Serializable;
 import java.net.URL;
-import java.util.List;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler {
 
+    private static final String SAVED_LAYOUT_MANAGER = "SavedLayout" ;
     private RecyclerView mRecyclerMovies;
     private MovieAdapter mAdapter;
     private ProgressBar mLoadingIndicator;
     private TextView mErrorMessage;
     private GridLayoutManager layoutManager;
+    private ArrayList<Movie> mMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerMovies.setHasFixedSize(false);
         mRecyclerMovies.setAdapter(mAdapter);
 
-        loadMovies(Network.SearchType.POPULAR_MOVIE);
+        if (savedInstanceState == null || !savedInstanceState.containsKey(SAVED_LAYOUT_MANAGER)) {
+            loadMovies(Network.SearchType.POPULAR_MOVIE);
+        } else {
+            mMovies = savedInstanceState.getParcelableArrayList(SAVED_LAYOUT_MANAGER);
+            mAdapter.setData(mMovies);
+        }
+
     }
 
     private void loadMovies(Network.SearchType type) {
@@ -68,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public void onClick(Movie selectedMovie) {
 
         Intent intentToStartDetailActivity = new Intent(this, DetailMovieActivity.class);
-        intentToStartDetailActivity.putExtra(Intent.EXTRA_RETURN_RESULT, (Serializable) selectedMovie);
+        intentToStartDetailActivity.putExtra(Intent.EXTRA_RETURN_RESULT, (Parcelable) selectedMovie);
         startActivity(intentToStartDetailActivity);
     }
 
@@ -114,7 +122,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    private class GetMoviesTask extends AsyncTask<Network.SearchType, Void, List<Movie>> {
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(SAVED_LAYOUT_MANAGER, mMovies);
+        super.onSaveInstanceState(outState);
+    }
+
+    private class GetMoviesTask extends AsyncTask<Network.SearchType, Void, ArrayList<Movie>> {
 
         @Override
         protected void onPreExecute() {
@@ -123,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         }
 
         @Override
-        protected List<Movie> doInBackground(Network.SearchType... params) {
+        protected ArrayList<Movie> doInBackground(Network.SearchType... params) {
 
             if (params.length == 0) {
                 return null;
@@ -137,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                     String jsonResponse = Network
                             .getResponseFromHttpUrl(requestUrl);
 
-                    List<Movie> movies = MoviesParseJson
+                    ArrayList<Movie> movies = MoviesParseJson
                             .getMoviesFromJson(jsonResponse);
 
                     return movies;
@@ -151,11 +165,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         }
 
         @Override
-        protected void onPostExecute(List<Movie> movies) {
+        protected void onPostExecute(ArrayList<Movie> movies) {
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             if (movies != null) {
 
                 showMovies();
+                mMovies = movies;
                 mAdapter.setData(movies);
             } else {
                 showErrorMessage();

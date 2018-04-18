@@ -15,7 +15,7 @@ import java.util.List;
 
 public final class MoviesParseJson {
 
-    public static List<Movie> getMoviesFromJson(String jsonStr)
+    public static ArrayList<Movie> getMoviesFromJson(String jsonStr)
             throws JSONException {
 
         final String IDENTIFIER_ID = "id";
@@ -27,7 +27,7 @@ public final class MoviesParseJson {
         final String IDENTIFIER_IMAGE = "http://image.tmdb.org/t/p/w500";
         final String IDENTIFIER_BACKDROP_PATH = "backdrop_path";
 
-        List<Movie> movies;
+        ArrayList<Movie> movies;
 
         JSONObject forecastJson = new JSONObject(jsonStr);
 

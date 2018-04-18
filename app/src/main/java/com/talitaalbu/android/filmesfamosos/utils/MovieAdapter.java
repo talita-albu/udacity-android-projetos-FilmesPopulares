@@ -15,6 +15,7 @@ import com.talitaalbu.android.filmesfamosos.model.Movie;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -87,6 +88,11 @@ public class MovieAdapter  extends RecyclerView.Adapter <MovieAdapter.MovieHolde
 
     public boolean isLoadMore(int position) {
         return showLoadMore && (position == (getItemCount() - 1));
+    }
+
+    public ArrayList<Movie> getData()
+    {
+        return (ArrayList<Movie>) movieData;
     }
 
     class MovieHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

@@ -46,6 +46,8 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
 
     private ActivityMovieDetailBinding mBinding;
     private Movie movie;
+    private ArrayList<Trailer> mTrailers;
+    private ArrayList<Review> mReviews;
     private TrailerAdapter tAdapter;
     private GridLayoutManager layoutManager;
     private RecyclerView mRecyclerTrailers;
@@ -54,6 +56,10 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
     private RecyclerView mRecyclerReviews;
     private GridLayoutManager layoutManagerR;
 
+    private static final String SAVED_MOVIE = "SavedMovie" ;
+    private static final String SAVED_TRAILERS = "SavedTrailers" ;
+    private static final String SAVED_REVIEWS = "SavedReviews" ;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,14 +67,6 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_detail);
 
         setSupportActionBar(mBinding.headerDetail.headerToolbar);
-
-        Intent intentThatStartedThisActivity = getIntent();
-        if (intentThatStartedThisActivity != null) {
-            if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_RETURN_RESULT)) {
-                movie = (Movie) intentThatStartedThisActivity.getSerializableExtra(Intent.EXTRA_RETURN_RESULT);
-                populateMovie();
-            }
-        }
 
         tAdapter = new TrailerAdapter(this, this);
         layoutManager
@@ -85,7 +83,7 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
         mRecyclerTrailers.setLayoutManager(layoutManager);
         mRecyclerTrailers.setHasFixedSize(false);
         mRecyclerTrailers.setAdapter(tAdapter);
-        loadTrailers();
+        //loadTrailers();
 
         rAdapter = new ReviewAdapter();
         layoutManagerR
@@ -102,7 +100,34 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
         mRecyclerReviews.setLayoutManager(layoutManagerR);
         mRecyclerReviews.setHasFixedSize(false);
         mRecyclerReviews.setAdapter(rAdapter);
-        loadReviews();
+        //loadReviews();
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(SAVED_MOVIE)) {
+            movie = savedInstanceState.getParcelable(SAVED_MOVIE);
+            populateMovie();
+        } else {
+            Intent intentThatStartedThisActivity = getIntent();
+            if (intentThatStartedThisActivity != null) {
+                if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_RETURN_RESULT)) {
+                    movie = (Movie) intentThatStartedThisActivity.getParcelableExtra(Intent.EXTRA_RETURN_RESULT);
+                    populateMovie();
+                }
+            }
+        }
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(SAVED_TRAILERS)) {
+            mTrailers = savedInstanceState.getParcelableArrayList(SAVED_TRAILERS);
+            tAdapter.setData(mTrailers);
+        } else {
+            loadTrailers();
+        }
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(SAVED_REVIEWS)) {
+            mReviews = savedInstanceState.getParcelableArrayList(SAVED_REVIEWS);
+            rAdapter.setData(mReviews);
+        } else {
+            loadReviews();
+        }
 
     }
 
@@ -142,6 +167,14 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
                 }
             }.execute();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(SAVED_MOVIE, movie);
+        outState.putParcelableArrayList(SAVED_TRAILERS, mTrailers);
+        outState.putParcelableArrayList(SAVED_REVIEWS, mReviews);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -279,6 +312,7 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
         protected void onPostExecute(ArrayList<Trailer> trailers) {
             super.onPostExecute(trailers);
             if (trailers != null) {
+                mTrailers = trailers;
                 tAdapter.setData(trailers);
             } else {
                 Toast.makeText(context, context.getString(R.string.no_trailers), Toast.LENGTH_LONG).show();
@@ -330,6 +364,7 @@ public class DetailMovieActivity extends AppCompatActivity implements TrailerAda
         protected void onPostExecute(ArrayList<Review> reviews) {
             super.onPostExecute(reviews);
             if (reviews != null) {
+                mReviews = reviews;
                 rAdapter.setData(reviews);
             } else {
                 Toast.makeText(context, context.getString(R.string.no_reviews), Toast.LENGTH_LONG).show();
